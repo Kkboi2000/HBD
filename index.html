@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pinata Celebration</title>
+    <style>
+        body {
+            text-align: center;
+            background-color: #fce4ec;
+            font-family: Arial, sans-serif;
+        }
+        #pinata {
+            width: 150px;
+            height: 150px;
+            background: url('https://i.pinimg.com/originals/e0/ba/76/e0ba76ee5d0fc1d39cde91798e0d8cea.gif') no-repeat center;
+            background-size: contain;
+            display: block;
+            margin: 100px auto;
+            cursor: pointer;
+            transition: transform 0.1s ease-in-out;
+        }
+        #break-text {
+            font-size: 18px;
+            color: #d81b60;
+            margin-top: 10px;
+        }
+        #message {
+            display: none;
+            font-size: 24px;
+            font-weight: bold;
+            color: #d81b60;
+            margin-top: 20px;
+        }
+        #extra-image {
+            display: none;
+            width: 200px;
+            height: 200px;
+            background: url('https://media.tenor.com/4hBD7w7IVa4AAAAM/moulinquinn-the-aristocats.gif') no-repeat center;
+            background-size: contain;
+            margin: 20px auto;
+        }
+        .confetti {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            background-color: #ff4081;
+            opacity: 0.8;
+            animation: fall 1.5s linear infinite;
+        }
+        @keyframes fall {
+            0% { transform: translateY(0); opacity: 1; }
+            100% { transform: translateY(500px); opacity: 0; }
+        }
+        .shake {
+            transform: rotate(5deg);
+        }
+        .pop {
+            transform: scale(1.2);
+        }
+    </style>
+</head>
+<body>
+    <div id="pinata" onclick="hitPinata()"></div>
+    <div id="break-text">Break it</div>
+    <div id="message">🎉 Happy Birthday Wakana Kub! 🎉</div>
+    <div id="extra-image"></div>
+
+    <script>
+        let hits = 0;
+        function hitPinata() {
+            hits++;
+            let pinata = document.getElementById("pinata");
+            pinata.classList.add("shake", "pop");
+            setTimeout(() => pinata.classList.remove("shake", "pop"), 50);
+            
+            if (hits >= 7) {
+                pinata.style.display = "none";
+                document.getElementById("break-text").style.display = "none";
+                document.getElementById("message").style.display = "block";
+                document.getElementById("extra-image").style.display = "block";
+                dropConfetti();
+            }
+        }
+
+        function dropConfetti() {
+            for (let i = 0; i < 50; i++) {
+                let confetti = document.createElement("div");
+                confetti.className = "confetti";
+                confetti.style.left = Math.random() * window.innerWidth + "px";
+                confetti.style.backgroundColor = ["#ff4081", "#ffeb3b", "#3f51b5"][Math.floor(Math.random() * 3)];
+                document.body.appendChild(confetti);
+                setTimeout(() => confetti.remove(), 1500);
+            }
+        }
+    </script>
+</body>
+</html>
